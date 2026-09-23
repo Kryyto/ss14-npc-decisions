@@ -10,6 +10,7 @@ const API_BASE_URL = ["localhost", "127.0.0.1"].includes(location.hostname)
   : "https://kryyto-ss14-npc-decisions.hf.space";
 
 const COLD_START_DELAY_MS = 3000;
+const COLD_START_GAP_MS = 5000;
 const JOB_LOAD_ATTEMPTS = 30;
 const JOB_LOAD_RETRY_MS = 2000;
 const MESSAGE_MAX = 2000;
@@ -253,14 +254,14 @@ function renderCharacterProfile() {
   els.charName.textContent = p.name || "";
   els.charRole.textContent = role;
   els.charDept.textContent = t("profile.department") || "Service";
-  els.charEmployeeId.textContent = p.employee_id || "";
-  els.charSpecies.textContent = localizedField(p.species);
+  if (els.charEmployeeId) els.charEmployeeId.textContent = p.employee_id || "";
+  if (els.charSpecies) els.charSpecies.textContent = localizedField(p.species);
   els.charAssignment.textContent = localizedField(p.assignment);
   const rt = npcStates.get(job.key);
   els.charState.textContent = rt && rt.onBreak
     ? (t("profile.on_break") || "On break")
     : localizedField(p.current_state);
-  els.charLocation.textContent = localizedField(p.location);
+  if (els.charLocation) els.charLocation.textContent = localizedField(p.location);
 
   const layers = SPRITE_LAYERS[job.key];
   const spriteOk =
@@ -467,6 +468,7 @@ els.form.addEventListener("submit", async (event) => {
     if (!settled) setStatus(t("status.cold_start"));
   }, COLD_START_DELAY_MS);
 
+  const started = performance.now();
   try {
     const res = await fetch(`${API_BASE_URL}/predict`, {
       method: "POST",
@@ -484,9 +486,17 @@ els.form.addEventListener("submit", async (event) => {
       return;
     }
     lastResult = await res.json();
+    const totalMs = performance.now() - started;
     applyPredictionImpact(jobKey, lastResult.answers);
     renderResult(lastResult);
-    setStatus(t("status.done"));
+    let statusText = `${t("status.done")} ${(totalMs / 1000).toFixed(1)} s`;
+    if (lastResult.latency_ms != null) {
+      statusText += ` (${t("status.server")} ${(lastResult.latency_ms / 1000).toFixed(1)} s)`;
+    }
+    if (totalMs - (lastResult.latency_ms ?? 0) > COLD_START_GAP_MS) {
+      statusText += ` · ${t("status.cold_start_tag")}`;
+    }
+    setStatus(statusText);
   } catch (err) {
     setStatus("");
     showError(t("errors.network"));

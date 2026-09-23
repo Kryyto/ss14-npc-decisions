@@ -389,4 +389,5 @@ async def predict(req: PredictRequest, request: Request):
     if infer_error is not None or log_error is not None:
         # Logging is part of the contract: a lost audit row is a server error too.
         return JSONResponse({"detail": "internal server error"}, status_code=500)
-    return {"request_id": request_id, "answers": answers, "reply": reply}
+    return {"request_id": request_id, "answers": answers, "reply": reply,
+            "latency_ms": latency_ms}

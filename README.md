@@ -188,7 +188,8 @@ curl -X POST http://localhost:7860/predict \
     "new_mess": {"type":"noul","probability":0.98},
     "biohazard":{"type":"noul","probability":0.97}
   },
-  "reply": "I'll grab my mop and take care of that mess right away."
+  "reply": "I'll grab my mop and take care of that mess right away.",
+  "latency_ms": 812
 }
 ```
 

@@ -27,8 +27,10 @@
   "status": {
     "loading_jobs": "Loading workers…",
     "sending": "Sending to the model…",
-    "cold_start": "The model is warming up — the first request may take up to a minute.",
-    "done": "Done."
+    "cold_start": "The model is warming up. The first request may take up to a minute.",
+    "done": "Done.",
+    "server": "server",
+    "cold_start_tag": "cold start"
   },
   "errors": {
     "jobs": "Could not load the worker list. Is the backend running?",

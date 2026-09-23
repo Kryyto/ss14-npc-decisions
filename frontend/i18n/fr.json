@@ -5,7 +5,7 @@
     "system": "INTERFACE DU PERSONNEL DE SERVICE"
   },
   "profile": {
-    "title": "Dossier du personnel",
+    "title": "Dossier de l'employé",
     "department": "Service",
     "employee_id": "Matricule",
     "species": "Espèce",
@@ -27,8 +27,10 @@
   "status": {
     "loading_jobs": "Chargement des métiers…",
     "sending": "Analyse du message…",
-    "cold_start": "Le modèle démarre — la première requête peut prendre jusqu'à une minute.",
-    "done": "Analyse terminée."
+    "cold_start": "Le modèle démarre. La première requête peut prendre jusqu'à une minute.",
+    "done": "Analyse terminée.",
+    "server": "serveur",
+    "cold_start_tag": "démarrage à froid"
   },
   "errors": {
     "jobs": "Impossible de charger la liste des métiers. Le serveur est-il lancé ?",
