@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>SS14 NPC Decisions</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <span class="station-badge" aria-hidden="true">SH-14</span>
+      <span class="status-lamp" aria-hidden="true"></span>
+      <div class="brand-text">
+        <span class="eyebrow" data-i18n="app.system">SERVICE PERSONNEL INTERFACE</span>
+        <h1 data-i18n="app.title">SH14 NPC Decisions</h1>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="unofficial-badge" data-i18n="app.unofficial">DEMO</span>
+      <div class="lang-switch" role="group" aria-label="Language / Langue">
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <div class="workspace">
+      <form id="predict-form" class="panel" novalidate>
+        <div class="field">
+          <label for="job" data-i18n="form.job">Worker</label>
+          <select id="job" name="job" required disabled></select>
+          <p class="hint" id="job-desc"></p>
+        </div>
+
+        <div class="field">
+          <label for="message" data-i18n="form.message">Message</label>
+          <textarea id="message" name="message" rows="5" maxlength="2000" required></textarea>
+          <p class="char-count" id="char-count" aria-hidden="true"></p>
+        </div>
+
+        <button type="submit" id="submit" class="submit" disabled data-i18n="form.submit">Ask</button>
+
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+        <p id="error" class="error" role="alert" hidden></p>
+      </form>
+
+      <section id="results" class="panel results" aria-labelledby="results-title" hidden>
+        <h2 id="results-title" data-i18n="results.title">Model answers</h2>
+        <div id="answers"></div>
+        <p id="request-id" class="request-id"></p>
+      </section>
+    </div>
+
+    <aside id="dossier" class="panel dossier" aria-labelledby="dossier-title" hidden>
+      <h2 id="dossier-title" data-i18n="profile.title">Personnel file</h2>
+
+      <div class="portrait-bay">
+        <div id="char-sprite" class="character-sprite" role="img" aria-label="" hidden>
+          <span class="sprite-layer sprite-body" aria-hidden="true"></span>
+          <span class="sprite-layer sprite-uniform" aria-hidden="true"></span>
+          <span class="sprite-layer sprite-shoes" aria-hidden="true"></span>
+          <span class="sprite-layer sprite-hair" aria-hidden="true"></span>
+          <span class="sprite-layer sprite-head" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <p class="char-name" id="char-name"></p>
+      <p class="char-role"><span id="char-role"></span><span class="dept-chip" id="char-dept"></span></p>
+
+      <dl class="dossier-fields">
+        <div class="dossier-row">
+          <dt data-i18n="profile.employee_id">Employee ID</dt>
+          <dd id="char-employee-id"></dd>
+        </div>
+        <div class="dossier-row">
+          <dt data-i18n="profile.species">Species</dt>
+          <dd id="char-species"></dd>
+        </div>
+        <div class="dossier-row">
+          <dt data-i18n="profile.assignment">Assignment</dt>
+          <dd id="char-assignment"></dd>
+        </div>
+        <div class="dossier-row">
+          <dt data-i18n="profile.current_state">Current state</dt>
+          <dd id="char-state"></dd>
+        </div>
+        <div class="dossier-row">
+          <dt data-i18n="profile.location">Location</dt>
+          <dd id="char-location"></dd>
+        </div>
+      </dl>
+
+      <section class="mental" aria-labelledby="mental-title">
+        <h3 id="mental-title" data-i18n="profile.mental_health">Condition</h3>
+        <svg id="mental-chart" viewBox="0 0 260 220" role="img" aria-label="Condition chart">
+          <rect class="chart-frame" x="38" y="18" width="204" height="170"/>
+          <line class="chart-grid" x1="89" y1="18" x2="89" y2="188"/>
+          <line class="chart-grid" x1="140" y1="18" x2="140" y2="188"/>
+          <line class="chart-grid" x1="191" y1="18" x2="191" y2="188"/>
+          <line class="chart-grid" x1="38" y1="145.5" x2="242" y2="145.5"/>
+          <line class="chart-grid" x1="38" y1="103" x2="242" y2="103"/>
+          <line class="chart-grid" x1="38" y1="60.5" x2="242" y2="60.5"/>
+          <line class="chart-axis" x1="38" y1="18" x2="38" y2="188"/>
+          <line class="chart-axis" x1="38" y1="188" x2="242" y2="188"/>
+          <text class="chart-tick" x="32" y="192" text-anchor="end">0</text>
+          <text class="chart-tick" x="32" y="149" text-anchor="end">25</text>
+          <text class="chart-tick" x="32" y="107" text-anchor="end">50</text>
+          <text class="chart-tick" x="32" y="64" text-anchor="end">75</text>
+          <text class="chart-tick" x="32" y="22" text-anchor="end">100</text>
+          <text class="chart-tick" x="38" y="205" text-anchor="middle">0</text>
+          <text class="chart-tick" x="89" y="205" text-anchor="middle">25</text>
+          <text class="chart-tick" x="140" y="205" text-anchor="middle">50</text>
+          <text class="chart-tick" x="191" y="205" text-anchor="middle">75</text>
+          <text class="chart-tick" x="242" y="205" text-anchor="middle">100</text>
+          <text class="chart-axis-label" id="mental-x-label" x="140" y="218" text-anchor="middle"></text>
+          <text class="chart-axis-label" id="mental-y-label" x="12" y="103" text-anchor="middle"
+                transform="rotate(-90 12 103)"></text>
+          <line class="chart-guide-x" id="mental-guide-x" x1="0" y1="0" x2="0" y2="188"/>
+          <line class="chart-guide" id="mental-guide-y" x1="38" y1="0" x2="0" y2="0"/>
+          <circle class="chart-point-glow" id="mental-point-glow" cx="0" cy="0" r="9"/>
+          <circle class="chart-point" id="mental-point" cx="0" cy="0" r="5"/>
+        </svg>
+        <div class="mental-legend">
+          <span class="mental-item">
+            <span class="mental-dot tiredness" aria-hidden="true"></span>
+            <span data-i18n="profile.tiredness">Tiredness</span>
+            <b id="mental-tiredness-val">–</b>
+          </span>
+          <span class="mental-item">
+            <span class="mental-dot stress" aria-hidden="true"></span>
+            <span data-i18n="profile.stress">Stress</span>
+            <b id="mental-stress-val">–</b>
+          </span>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

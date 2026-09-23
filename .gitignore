@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+node_modules/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.pytest_cache/
+*.log
+analysis/eval_report*.jsonl

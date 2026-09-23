@@ -1,0 +1,83 @@
+{
+  "app": {
+    "title": "Décisions PNJ SS14",
+    "tagline": "Démo de classification — parlez à un membre du personnel de la station",
+    "system": "INTERFACE DU PERSONNEL DE SERVICE"
+  },
+  "profile": {
+    "title": "Dossier du personnel",
+    "department": "Service",
+    "employee_id": "Matricule",
+    "species": "Espèce",
+    "assignment": "Affectation",
+    "current_state": "État actuel",
+    "location": "Localisation",
+    "mental_health": "État",
+    "tiredness": "Fatigue",
+    "stress": "Stress",
+    "on_break": "En pause"
+  },
+  "form": {
+    "job": "Métier",
+    "message": "Votre message",
+    "submit": "Envoyer",
+    "submitting": "Analyse…",
+    "char_count": "{n}/{max}"
+  },
+  "status": {
+    "loading_jobs": "Chargement des métiers…",
+    "sending": "Analyse du message…",
+    "cold_start": "Le modèle démarre — la première requête peut prendre jusqu'à une minute.",
+    "done": "Analyse terminée."
+  },
+  "errors": {
+    "jobs": "Impossible de charger la liste des métiers. Le serveur est-il lancé ?",
+    "validation": "Saisissez un message entre 1 et 2000 caractères.",
+    "rate_limited": "Trop de requêtes — veuillez patienter un instant.",
+    "server": "Le serveur a renvoyé une erreur. Veuillez réessayer.",
+    "network": "Impossible de joindre le serveur. Le serveur est-il bien lancé ?"
+  },
+  "results": {
+    "title": "Décisions du modèle",
+    "reply": "Réponse du PNJ",
+    "phrase_rule": "Règle d'expression exacte",
+    "chosen": "Choix",
+    "confidence": "confiance",
+    "request_id": "Requête",
+    "yes": "Oui",
+    "no": "Non",
+    "level_prefix": "Niveau"
+  },
+  "questions": {
+    "intent": "Intention",
+    "tone": "Ton",
+    "new_mess": "Intervention requise",
+    "biohazard": "Risque biologique",
+    "dietary_restriction": "Restriction alimentaire",
+    "intoxication_risk": "Risque d'intoxication"
+  },
+  "options": {
+    "cleaning_request": "Demande de nettoyage",
+    "report_hazard": "Danger à baliser",
+    "supply_request": "Demande de fournitures",
+    "complaint": "Plainte",
+    "unrelated": "Sans rapport",
+    "food_order": "Commande de repas",
+    "menu_question": "Question sur la carte",
+    "kitchen_supply": "Fournitures de cuisine",
+    "drink_order": "Commande au bar",
+    "bar_supply": "Fournitures du bar",
+    "emergency": "Urgence",
+    "follow_request": "Demande de suivre",
+    "directions": "Demande de chemin",
+    "small_talk": "Discussion",
+    "greeting": "Salutation",
+    "work_command": "Ordre de se mettre au travail"
+  },
+  "levels": {
+    "0": "Calme ou poli",
+    "1": "Direct ou impatient",
+    "2": "Agressif ou insultant",
+    "3": "Menaçant ou dangereux"
+  }
+}

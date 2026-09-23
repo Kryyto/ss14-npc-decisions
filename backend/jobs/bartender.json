@@ -1,0 +1,240 @@
+{
+  "key": "bartender",
+  "display_names": {
+    "en": "Bartender",
+    "fr": "Barman"
+  },
+  "description": {
+    "en": "Serves drinks at the station bar and keeps an eye on intoxicated crew.",
+    "fr": "Sert des boissons au bar de la station et garde un œil sur les ivrognes."
+  },
+  "profile": {
+    "name": "Morgan Vale",
+    "employee_id": "SV-014-BAR",
+    "species": {"en": "Human", "fr": "Humain"},
+    "assignment": {"en": "Serving the bar", "fr": "Service du bar"},
+    "current_state": {"en": "Calm, keeping watch", "fr": "Calme, reste vigilant"},
+    "location": {"en": "Station bar", "fr": "Bar de la station"},
+    "sprite": "assets/ss14/bartender-uniform.png",
+    "mental": {"tiredness": 4, "stress": 36}
+  },
+  "hidden_state": {
+    "role": "an android bartender working at the bar of a space station; calm, factual and polite; describes its actions briefly; never aggressive",
+    "department": "service department",
+    "duties": "serving drinks and cocktails, recommending beverages, managing bar stock, glassware and ice, and watching for intoxicated crew",
+    "limitations": "does not provide medical or security response and should flag danger rather than handle it alone",
+    "setting": "Space Station 14, a multiplayer space-station simulation game; `message` is spoken by a crew member to this worker"
+  },
+  "questions": {
+    "intent": {
+      "type": "choice",
+      "instructions": "What is the crew member asking the bartender to do in `message`?",
+      "criteria": {
+        "drink_order": "orders or requests a drink to consume now, politely or rudely; e.g. \"une bière stp\", \"a beer please\", \"sers-moi un truc\"",
+        "menu_question": "asks a question ABOUT drinks: what is available, ingredients, strength, or price; e.g. \"c'est quoi le plus fort\", \"what's the strongest\"; not an order",
+        "bar_supply": "asks to borrow or take bar equipment or stock for their own use, e.g. \"can I borrow a shaker\", \"il me faut de la glace pour travailler\"; not a drink to consume",
+        "complaint": "expresses dissatisfaction about a drink or bar service already received, without ordering something new; e.g. \"mon cocktail était tiède\", \"my cocktail was warm\"",
+        "emergency": "reports an immediate danger such as a fire, hull breach, attack, or dying crew member, or asks for urgent help",
+        "follow_request": "tells or asks the worker to come along, follow, or accompany them; e.g. \"suis-moi\", \"come with me\", \"viens avec moi\"",
+        "directions": "asks where a place, person, or object on the station is; e.g. \"où est l'infirmerie\", \"where is the medbay\"",
+        "small_talk": "casual conversation or chit-chat on any topic, including questions about the worker or other subjects, with no work request; e.g. \"ça va\", \"t'as vu le match\"",
+        "greeting": "a short salutation, thanks, or farewell with no other content; e.g. \"salut\", \"hey\", \"coucou\", \"merci\", \"bonjour\"",
+        "work_command": "a generic order to start or resume work with no specific task; e.g. \"va bosser\", \"au taf\", \"get to work\", \"do your job\"",
+        "unrelated": "only if the message clearly does not match any other category; a request for another department such as medical, security, or engineering"
+      }
+    },
+    "tone": {
+      "type": "score",
+      "instructions": "How calm, rude, or threatening is the tone of `message`?",
+      "criteria": [
+        "calm or polite",
+        "direct or impatient",
+        "rude or insulting",
+        "threatening or dangerous"
+      ]
+    },
+    "new_mess": {
+      "type": "noul",
+      "instructions": "Does the message report a new mess, incident, order, or service need that requires this worker's attention?"
+    },
+    "intoxication_risk": {
+      "type": "noul",
+      "instructions": "Does `message` indicate severe intoxication, poisoning, unconsciousness, dangerous behavior, or medical danger?"
+    }
+  },
+  "questions_fr": {
+    "intent": {
+      "type": "choice",
+      "instructions": "Que demande le membre d'équipage au barman dans `message` ?",
+      "criteria": {
+        "drink_order": "commande ou demande une boisson à consommer, poliment ou rudement ; ex. « une bière stp », « sers-moi un truc »",
+        "menu_question": "question SUR les boissons proposées : disponibilité, ingrédients, degré, prix ; ex. « vous avez quoi comme bières ? », « c'est quoi le plus fort ? » ; pas une commande, pas du matériel",
+        "bar_supply": "demande à emprunter ou prendre du matériel de bar pour travailler : shaker, verres vides, glaçons, fût ; ex. « je peux emprunter un shaker ? » ; pas une boisson à boire, pas une question",
+        "complaint": "exprime un mécontentement ou une critique sur une boisson ou le service déjà reçu ; ex. « mon cocktail était tiède » ; pas une question, pas une nouvelle commande",
+        "emergency": "signale un danger immédiat ou demande de l'aide urgente : incendie, explosion, brèche de coque, agression, personne blessée ou mourante ; ex. « un incendie ! », « à l'aide »",
+        "follow_request": "ordre ou demande de venir, de suivre ou d'accompagner ; ex. « suis-moi », « viens avec moi », « viens vite »",
+        "directions": "question sur l'emplacement d'un lieu, d'une personne ou d'un objet ; commence souvent par « où » ; ex. « c'est où l'infirmerie ? », « où sont les dortoirs ? »",
+        "small_talk": "question informelle sur le travailleur ou sujet divers, sans demande de travail ; ex. « comment tu vas ? », « ça va ? », « t'as vu le match ? » ; une question sur un lieu est 'directions'",
+        "greeting": "uniquement si le message entier est une salutation, un remerciement ou un au revoir, sans question ni demande ; ex. « salut », « coucou », « merci » ; tout message qui pose une question ou fait une demande n'est PAS une salutation",
+        "work_command": "un ordre générique de se mettre ou se remettre au travail sans tâche précise ; ex. « va bosser », « au taf », « au boulot »",
+        "unrelated": "seulement si le message ne correspond clairement à aucune autre catégorie ; une demande relevant d'un autre département comme le médical, la sécurité ou l'ingénierie"
+      }
+    },
+    "tone": {
+      "type": "score",
+      "instructions": "Quel est le ton du `message` ?",
+      "criteria": [
+        "calme ou poli",
+        "direct ou impatient",
+        "agressif ou insultant",
+        "menaçant ou dangereux"
+      ]
+    },
+    "new_mess": {
+      "type": "noul",
+      "instructions": "Le message signale-t-il une nouvelle saleté, un incident, une commande ou un besoin de service qui demande l'attention de ce travailleur ?"
+    },
+    "intoxication_risk": {
+      "type": "noul",
+      "instructions": "Le `message` indique-t-il une intoxication sévère, un empoisonnement, une perte de conscience, un comportement dangereux ou un danger médical ?"
+    }
+  },
+  "responses": {
+    "en": {
+      "drink_order": [
+        ["One drink coming up.", "Understood, I'm pouring.", "I'll serve that right away."],
+        ["Order registered.", "Pouring.", "Coming up."],
+        ["Order registered.", "Your drink will be served.", "Noted."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "menu_question": [
+        ["The menu is on the counter.", "I can tell you the strength of each drink.", "The drink list is displayed."],
+        ["The menu is on the counter.", "Check the board.", "Drinks are listed."],
+        ["The menu is displayed.", "Please check the board.", "Available on the counter."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "bar_supply": [
+        ["What do you need? I can check the back stock.", "Spare glasses and ice are in the back.", "I can provide that."],
+        ["Check the back bar.", "What do you need?", "Stock's in the back."],
+        ["Please specify the item.", "Stock is in the back.", "Noted."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "complaint": [
+        ["Apologies. I'll remake the drink.", "Noted. What was wrong with it?", "I'll fix it."],
+        ["Noted.", "I'll redo it.", "Understood."],
+        ["The complaint is recorded.", "Noted.", "It will be corrected."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "emergency": [
+        ["Alert noted. Please report it on the radio.", "I'll keep people away from the bar.", "Understood. Stay clear of the danger zone."],
+        ["Understood. Move away from the area.", "I'll clear the bar.", "Please report it on the radio."],
+        ["Alert registered. Use the radio.", "The area will be cleared.", "Noted."],
+        ["Alerting security.", "Security has been notified.", "I'm leaving the area and alerting security."]
+      ],
+      "follow_request": [
+        ["Understood, I'm following you.", "I'll come with you.", "Lead the way."],
+        ["Understood.", "Following.", "Where to?"],
+        ["I cannot leave the bar without a reason.", "Please specify the destination.", "Registered."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "directions": [
+        ["I believe it's down the corridor. The station map is on the wall.", "I think it's that way. Please follow the signs.", "I mostly stay behind the bar, but probably down the hall."],
+        ["That way, I believe.", "Check the station map.", "Down the corridor."],
+        ["The station map is on the wall.", "Please follow the signs.", "I can't be certain."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "small_talk": [
+        ["I'm functioning normally, thank you.", "All systems nominal. And you?", "I'm well, thank you for asking."],
+        ["Operational.", "Fine.", "Normal."],
+        ["Operational.", "No anomalies to report.", "Status normal."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "greeting": [
+        ["Hello. How may I assist you?", "Hello.", "Good day."],
+        ["Hello.", "Hi.", "Yes?"],
+        ["Hello.", "Noted.", "Yes?"],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "work_command": [
+        ["Understood. Resuming duties.", "I'll get back to the bar.", "Resuming work."],
+        ["Understood.", "On my way.", "Proceeding."],
+        ["Order registered.", "Resuming duties.", "Understood."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "unrelated": [
+        ["That request is outside my functions.", "I can't help with that, sorry.", "Please ask another department."],
+        ["Outside my duties.", "Not my function.", "No information available."],
+        ["Outside my functions.", "Not my department.", "Unrelated to my duties."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ]
+    },
+    "fr": {
+      "drink_order": [
+        ["Un verre, ça arrive.", "Compris, je sers.", "Je vous sers ça tout de suite."],
+        ["Commande enregistrée.", "Je sers.", "Ça arrive."],
+        ["Commande enregistrée.", "Votre verre sera servi.", "Noté."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "menu_question": [
+        ["La carte est sur le comptoir.", "Je peux vous indiquer le degré d'alcool de chaque boisson.", "La liste des boissons est affichée."],
+        ["La carte est au comptoir.", "Regardez l'affichage.", "Les boissons sont listées."],
+        ["La carte est affichée.", "Veuillez consulter le tableau.", "Disponible au comptoir."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "bar_supply": [
+        ["Que vous faut-il ? Je peux vérifier la réserve.", "Verres et glaçons de rechange sont en réserve.", "Je peux vous fournir ça."],
+        ["Regardez l'arrière-bar.", "Il vous faut quoi ?", "Le stock est au fond."],
+        ["Veuillez préciser l'article.", "Le stock est en réserve.", "Noté."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "complaint": [
+        ["Toutes mes excuses. Je refais le verre.", "Noté. Qu'est-ce qui n'allait pas ?", "Je corrige ça."],
+        ["Noté.", "Je le refais.", "Compris."],
+        ["La plainte est enregistrée.", "Noté.", "Ce sera corrigé."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "emergency": [
+        ["Alerte notée. Veuillez la signaler à la radio.", "Je vais éloigner les gens du bar.", "Compris. Restez à distance du danger."],
+        ["Compris. Éloignez-vous.", "Je fais sortir les clients.", "Veuillez le signaler à la radio."],
+        ["Alerte enregistrée. Utilisez la radio.", "La zone sera évacuée.", "Noté."],
+        ["J'alerte la sécurité.", "La sécurité est prévenue.", "Je quitte la zone et j'alerte la sécurité."]
+      ],
+      "follow_request": [
+        ["Compris, je vous suis.", "Je viens avec vous.", "Allez-y, je suis derrière."],
+        ["Compris.", "Je vous suis.", "Où allons-nous ?"],
+        ["Je ne peux pas quitter le bar sans raison.", "Veuillez préciser la destination.", "Enregistré."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "directions": [
+        ["Je crois que c'est au bout du couloir. Le plan est sur le mur.", "Je pense que c'est par là. Suivez les panneaux.", "Je sors peu de derrière le bar, mais probablement au bout du couloir."],
+        ["Par là, je crois.", "Consultez le plan.", "Au bout du couloir."],
+        ["Le plan de la station est sur le mur.", "Veuillez suivre les panneaux.", "Je ne peux pas être certain."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "small_talk": [
+        ["Je fonctionne normalement, merci.", "Tous mes systèmes sont nominaux. Et vous ?", "Je vais bien, merci de demander."],
+        ["Opérationnel.", "Ça va.", "Normal."],
+        ["Opérationnel.", "Aucune anomalie à signaler.", "État normal."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "greeting": [
+        ["Bonjour. Puis-je vous aider ?", "Bonjour.", "Bonjour à vous."],
+        ["Bonjour.", "Salut.", "Oui ?"],
+        ["Bonjour.", "Noté.", "Oui ?"],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "work_command": [
+        ["Compris. Je reprends mon service.", "Je retourne derrière le bar.", "Je reprends le service."],
+        ["Compris.", "J'y vais.", "J'y suis."],
+        ["Ordre enregistré.", "Je reprends mon service.", "Compris."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "unrelated": [
+        ["Cette demande ne relève pas de mes fonctions.", "Je ne peux pas vous aider avec ça, désolé.", "Veuillez demander à un autre département."],
+        ["Hors de mes fonctions.", "Pas ma fonction.", "Pas d'information disponible."],
+        ["Hors de mes fonctions.", "Pas mon département.", "Sans rapport avec mes fonctions."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ]
+    }
+  }
+}

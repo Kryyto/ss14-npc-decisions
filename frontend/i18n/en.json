@@ -1,0 +1,83 @@
+{
+  "app": {
+    "title": "SS14 NPC Decisions",
+    "tagline": "Typed-decision demo — say something to a station worker",
+    "system": "SERVICE PERSONNEL INTERFACE"
+  },
+  "profile": {
+    "title": "Personnel file",
+    "department": "Service",
+    "employee_id": "Employee ID",
+    "species": "Species",
+    "assignment": "Assignment",
+    "current_state": "Current state",
+    "location": "Location",
+    "mental_health": "Condition",
+    "tiredness": "Tiredness",
+    "stress": "Stress",
+    "on_break": "On break"
+  },
+  "form": {
+    "job": "Worker",
+    "message": "Your message",
+    "submit": "Ask",
+    "submitting": "Thinking…",
+    "char_count": "{n}/{max}"
+  },
+  "status": {
+    "loading_jobs": "Loading workers…",
+    "sending": "Sending to the model…",
+    "cold_start": "The model is warming up — the first request may take up to a minute.",
+    "done": "Done."
+  },
+  "errors": {
+    "jobs": "Could not load the worker list. Is the backend running?",
+    "validation": "Enter a message between 1 and 2000 characters.",
+    "rate_limited": "Too many requests — please wait a moment.",
+    "server": "The server returned an error. Please try again.",
+    "network": "Could not reach the server. Is the backend running?"
+  },
+  "results": {
+    "title": "Model answers",
+    "reply": "NPC reply",
+    "phrase_rule": "Exact phrase rule",
+    "chosen": "Answer",
+    "confidence": "confidence",
+    "request_id": "Request",
+    "yes": "Yes",
+    "no": "No",
+    "level_prefix": "Level"
+  },
+  "questions": {
+    "intent": "Intent",
+    "tone": "Tone",
+    "new_mess": "Needs attention",
+    "biohazard": "Biohazard",
+    "dietary_restriction": "Dietary restriction",
+    "intoxication_risk": "Intoxication risk"
+  },
+  "options": {
+    "cleaning_request": "Cleaning request",
+    "report_hazard": "Hazard report",
+    "supply_request": "Supply request",
+    "complaint": "Complaint",
+    "unrelated": "Unrelated",
+    "food_order": "Food order",
+    "menu_question": "Menu question",
+    "kitchen_supply": "Kitchen supply",
+    "drink_order": "Drink order",
+    "bar_supply": "Bar supply",
+    "emergency": "Emergency",
+    "follow_request": "Asked to follow",
+    "directions": "Directions",
+    "small_talk": "Small talk",
+    "greeting": "Greeting",
+    "work_command": "Order to get to work"
+  },
+  "levels": {
+    "0": "Calm or polite",
+    "1": "Direct or impatient",
+    "2": "Rude or insulting",
+    "3": "Threatening or dangerous"
+  }
+}

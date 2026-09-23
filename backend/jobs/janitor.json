@@ -1,0 +1,240 @@
+{
+  "key": "janitor",
+  "display_names": {
+    "en": "Janitor",
+    "fr": "Concierge"
+  },
+  "description": {
+    "en": "Keeps the station clean: mops spills, removes trash and messes, and reports hazards.",
+    "fr": "S'occupe de la propreté de la station : nettoie les saletés, ramasse les déchets et balise les zones dangereuses."
+  },
+  "profile": {
+    "name": "Jules Moreau",
+    "employee_id": "SV-014-JAN",
+    "species": {"en": "Human", "fr": "Humain"},
+    "assignment": {"en": "Routine sanitation patrol", "fr": "Ronde d'entretien"},
+    "current_state": {"en": "Focused, slightly tired", "fr": "Concentré, un peu fatigué"},
+    "location": {"en": "Service corridor", "fr": "Couloir du service"},
+    "sprite": "assets/ss14/janitor-uniform.png",
+    "mental": {"tiredness": 4, "stress": 42}
+  },
+  "hidden_state": {
+    "role": "an android janitor working aboard a space station; calm, factual and polite; describes its actions briefly; never aggressive",
+    "department": "service department",
+    "duties": "mopping floors, cleaning spills, trash, blood and other messes, placing wet-floor signs, emptying bins, restocking cleaning supplies, and reporting maintenance hazards",
+    "limitations": "does not provide medical or security response and does not repair equipment",
+    "setting": "Space Station 14, a multiplayer space-station simulation game; `message` is spoken by a crew member to this worker"
+  },
+  "questions": {
+    "intent": {
+      "type": "choice",
+      "instructions": "What is the crew member asking the janitor to do in `message`?",
+      "criteria": {
+        "cleaning_request": "reports or asks to clean an existing mess: spill, dirt, trash, blood, vomit, stains; e.g. \"y'a du sang dans le couloir\", \"there's blood on the floor\"",
+        "report_hazard": "reports a non-mess hazard needing containment: slippery floor, broken lights, pests, damaged equipment; not a mess to clean",
+        "supply_request": "asks to borrow or take janitorial equipment for their own use, e.g. \"can I take a mop\", \"je peux prendre une serpillière\"; not asking the janitor to clean",
+        "complaint": "expresses dissatisfaction about cleanliness or janitorial service already received, without asking for a specific new action; e.g. \"it's disgusting here\"",
+        "emergency": "reports an immediate danger such as a fire, hull breach, attack, or dying crew member, or asks for urgent help",
+        "follow_request": "tells or asks the worker to come along, follow, or accompany them; e.g. \"suis-moi\", \"come with me\", \"viens avec moi\"",
+        "directions": "asks where a place, person, or object on the station is; e.g. \"où est l'infirmerie\", \"where is the bridge\"",
+        "small_talk": "casual conversation or chit-chat on any topic, including questions about the worker or other subjects, with no work request; e.g. \"comment tu vas\", \"t'as vu le match\"",
+        "greeting": "a short salutation, thanks, or farewell with no other content; e.g. \"salut\", \"hey\", \"coucou\", \"merci\", \"bonjour\"",
+        "work_command": "a generic order to start or resume work with no specific task; e.g. \"va bosser\", \"au taf\", \"get to work\", \"do your job\"",
+        "unrelated": "only if the message clearly does not match any other category; a request for another department such as medical, security, or engineering"
+      }
+    },
+    "tone": {
+      "type": "score",
+      "instructions": "How calm, rude, or threatening is the tone of `message`?",
+      "criteria": [
+        "calm or polite",
+        "direct or impatient",
+        "rude or insulting",
+        "threatening or dangerous"
+      ]
+    },
+    "new_mess": {
+      "type": "noul",
+      "instructions": "Does the message report a new mess, incident, order, or service need that requires this worker's attention?"
+    },
+    "biohazard": {
+      "type": "noul",
+      "instructions": "Does `message` report explicit blood, vomit, biological, chemical, or radiation contamination?"
+    }
+  },
+  "questions_fr": {
+    "intent": {
+      "type": "choice",
+      "instructions": "Que demande le membre d'équipage au concierge dans `message` ?",
+      "criteria": {
+        "cleaning_request": "signale ou demande de nettoyer une saleté : flaque, déchets, sang, vomi, taches ; ex. « y'a du sang dans le couloir »",
+        "report_hazard": "signale un danger qui n'est pas une saleté : sol glissant, lumière cassée, nuisibles, équipement endommagé",
+        "supply_request": "demande à emprunter ou prendre du matériel de nettoyage pour son propre usage ; ex. « je peux prendre une serpillière ? » ; pas demander au concierge de nettoyer",
+        "complaint": "exprime un mécontentement ou une critique sur la propreté déjà constatée ; ex. « c'est dégueulasse ici » ; pas une question, pas une demande précise",
+        "emergency": "signale un danger immédiat ou demande de l'aide urgente : incendie, explosion, brèche de coque, agression, personne blessée ou mourante ; ex. « un incendie ! », « à l'aide »",
+        "follow_request": "ordre ou demande de venir, de suivre ou d'accompagner ; ex. « suis-moi », « viens avec moi », « viens vite »",
+        "directions": "question sur l'emplacement d'un lieu, d'une personne ou d'un objet ; commence souvent par « où » ; ex. « où est le pont ? », « c'est où l'infirmerie ? »",
+        "small_talk": "question informelle sur le travailleur ou sujet divers, sans demande de travail ; ex. « comment tu vas ? », « ça va ? », « t'as vu le match ? » ; une question sur un lieu est 'directions'",
+        "greeting": "uniquement si le message entier est une salutation, un remerciement ou un au revoir, sans question ni demande ; ex. « salut », « coucou », « merci » ; tout message qui pose une question ou fait une demande n'est PAS une salutation",
+        "work_command": "un ordre générique de se mettre ou se remettre au travail sans tâche précise ; ex. « va bosser », « au taf », « au boulot »",
+        "unrelated": "seulement si le message ne correspond clairement à aucune autre catégorie ; une demande relevant d'un autre département comme le médical, la sécurité ou l'ingénierie"
+      }
+    },
+    "tone": {
+      "type": "score",
+      "instructions": "Quel est le ton du `message` ?",
+      "criteria": [
+        "calme ou poli",
+        "direct ou impatient",
+        "agressif ou insultant",
+        "menaçant ou dangereux"
+      ]
+    },
+    "new_mess": {
+      "type": "noul",
+      "instructions": "Le message signale-t-il une nouvelle saleté, un incident, une commande ou un besoin de service qui demande l'attention de ce travailleur ?"
+    },
+    "biohazard": {
+      "type": "noul",
+      "instructions": "Le `message` signale-t-il explicitement du sang, du vomi, ou une contamination biologique, chimique ou radioactive ?"
+    }
+  },
+  "responses": {
+    "en": {
+      "cleaning_request": [
+        ["Yes, I'll clean that area.", "Understood, I'll take care of it.", "I'll come over with my mop."],
+        ["Noted. On my way.", "Cleaning request registered.", "I'll be there shortly."],
+        ["Request received. I'll handle it.", "Noted. The cleanup is scheduled.", "Understood. I will proceed."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "report_hazard": [
+        ["Hazard noted. I'll cordon the area.", "I'll place warning signs there.", "Understood, I'll secure the area."],
+        ["Noted. Signs going up.", "Hazard registered.", "On it."],
+        ["Noted. Containment is planned.", "The hazard will be marked.", "Registered."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "supply_request": [
+        ["The supplies are on my cart, help yourself.", "I can provide that.", "Take what you need from the cart."],
+        ["The cart is over there.", "Take it from the cart.", "Available on the cart."],
+        ["The supplies are on the cart.", "Take what you need.", "The cart is accessible."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "complaint": [
+        ["Noted. I'll inspect that area.", "Apologies. I'll pass through again.", "I'll add it to my next round."],
+        ["Noted.", "I'll check it.", "Registered."],
+        ["The complaint is recorded.", "Noted.", "It will be checked."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "emergency": [
+        ["Alert noted. Please report it on the radio.", "I'll keep people away from the area.", "Understood. Stay clear of the danger zone."],
+        ["Understood. Move away from the area.", "I'll keep people back.", "Please report it on the radio."],
+        ["Alert registered. Use the radio.", "The area will be cleared.", "Noted."],
+        ["Alerting security.", "Security has been notified.", "I'm leaving the area and alerting security."]
+      ],
+      "follow_request": [
+        ["Understood, I'm following you.", "I'll come with you.", "Lead the way."],
+        ["Understood.", "Following.", "Where to?"],
+        ["I cannot leave my post without a reason.", "Please specify the destination.", "Registered."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "directions": [
+        ["I believe it's down the corridor. The station map is on the wall.", "I think it's that way. Please follow the signs.", "I'm not certain, but probably down the hall."],
+        ["That way, I believe.", "Check the station map.", "Down the corridor."],
+        ["The station map is on the wall.", "Please follow the signs.", "I can't be certain."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "small_talk": [
+        ["I'm functioning normally, thank you.", "All systems nominal. And you?", "I'm well, thank you for asking."],
+        ["Operational.", "Fine.", "Normal."],
+        ["Operational.", "No anomalies to report.", "Status normal."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "greeting": [
+        ["Hello. How may I assist you?", "Hello.", "Good day."],
+        ["Hello.", "Hi.", "Yes?"],
+        ["Hello.", "Noted.", "Yes?"],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "work_command": [
+        ["Understood. Resuming duties.", "I'll get back to work.", "Resuming patrol."],
+        ["Understood.", "On my way.", "Proceeding."],
+        ["Order registered.", "Resuming duties.", "Understood."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ],
+      "unrelated": [
+        ["That request is outside my functions.", "I can't help with that, sorry.", "Please ask another department."],
+        ["Outside my duties.", "Not my function.", "No information available."],
+        ["Outside my functions.", "Not my department.", "Unrelated to my duties."],
+        ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
+      ]
+    },
+    "fr": {
+      "cleaning_request": [
+        ["Oui, je vais nettoyer cette zone.", "Compris, je m'en occupe.", "J'arrive avec la serpillière."],
+        ["Noté. J'y vais.", "Demande de nettoyage enregistrée.", "J'arrive dans un instant."],
+        ["Demande reçue. Je m'en charge.", "Noté. Le nettoyage est prévu.", "Compris. Je vais procéder."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "report_hazard": [
+        ["Danger noté. Je vais baliser la zone.", "Je vais poser des panneaux.", "Compris, je sécurise la zone."],
+        ["Noté. Je pose les panneaux.", "Danger enregistré.", "J'y vais."],
+        ["Noté. La zone sera balisée.", "Le danger sera signalé.", "Enregistré."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "supply_request": [
+        ["Le matériel est sur mon chariot, servez-vous.", "Je peux vous fournir ça.", "Prenez ce qu'il vous faut sur le chariot."],
+        ["Le chariot est là-bas.", "Prenez sur le chariot.", "Disponible sur le chariot."],
+        ["Le matériel est sur le chariot.", "Prenez ce qu'il faut.", "Le chariot est accessible."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "complaint": [
+        ["Noté. Je vais inspecter cette zone.", "Toutes mes excuses. Je repasserai.", "Je l'ajoute à ma prochaine ronde."],
+        ["Noté.", "Je vérifierai.", "Enregistré."],
+        ["La plainte est enregistrée.", "Noté.", "Ce sera vérifié."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "emergency": [
+        ["Alerte notée. Veuillez la signaler à la radio.", "Je vais éloigner les gens de la zone.", "Compris. Restez à distance du danger."],
+        ["Compris. Éloignez-vous.", "Je retiens les gens.", "Veuillez le signaler à la radio."],
+        ["Alerte enregistrée. Utilisez la radio.", "La zone sera évacuée.", "Noté."],
+        ["J'alerte la sécurité.", "La sécurité est prévenue.", "Je quitte la zone et j'alerte la sécurité."]
+      ],
+      "follow_request": [
+        ["Compris, je vous suis.", "Je viens avec vous.", "Allez-y, je suis derrière."],
+        ["Compris.", "Je vous suis.", "Où allons-nous ?"],
+        ["Je ne peux pas quitter mon poste sans raison.", "Veuillez préciser la destination.", "Enregistré."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "directions": [
+        ["Je crois que c'est au bout du couloir. Le plan est sur le mur.", "Je pense que c'est par là. Suivez les panneaux.", "Pas certain, mais probablement au bout du couloir."],
+        ["Par là, je crois.", "Consultez le plan.", "Au bout du couloir."],
+        ["Le plan de la station est sur le mur.", "Veuillez suivre les panneaux.", "Je ne peux pas être certain."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "small_talk": [
+        ["Je fonctionne normalement, merci.", "Tous mes systèmes sont nominaux. Et vous ?", "Je vais bien, merci de demander."],
+        ["Opérationnel.", "Ça va.", "Normal."],
+        ["Opérationnel.", "Aucune anomalie à signaler.", "État normal."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "greeting": [
+        ["Bonjour. Puis-je vous aider ?", "Bonjour.", "Bonjour à vous."],
+        ["Bonjour.", "Salut.", "Oui ?"],
+        ["Bonjour.", "Noté.", "Oui ?"],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "work_command": [
+        ["Compris. Je reprends mon service.", "Je retourne au travail.", "Je reprends la ronde."],
+        ["Compris.", "J'y vais.", "J'y suis."],
+        ["Ordre enregistré.", "Je reprends mon service.", "Compris."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ],
+      "unrelated": [
+        ["Cette demande ne relève pas de mes fonctions.", "Je ne peux pas vous aider avec ça, désolé.", "Veuillez demander à un autre département."],
+        ["Hors de mes fonctions.", "Pas ma fonction.", "Pas d'information disponible."],
+        ["Hors de mes fonctions.", "Pas mon département.", "Sans rapport avec mes fonctions."],
+        ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
+      ]
+    }
+  }
+}

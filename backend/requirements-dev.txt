@@ -1,0 +1,4 @@
+# Test-only dependencies. The test suite exercises pure modules (config loader,
+# normalisation, rate limiter) and needs neither `laya` nor `supabase` installed;
+# `fastapi` + `pydantic` from requirements.txt are enough.
+pytest==8.4.2
