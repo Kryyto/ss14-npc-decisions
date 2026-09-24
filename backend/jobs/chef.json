@@ -49,17 +49,8 @@
       "criteria": [
         "calm or polite",
         "direct or impatient",
-        "rude or insulting",
         "threatening or dangerous"
       ]
-    },
-    "new_mess": {
-      "type": "noul",
-      "instructions": "Does the message report a new mess, incident, order, or service need that requires this worker's attention?"
-    },
-    "dietary_restriction": {
-      "type": "noul",
-      "instructions": "Does `message` mention an allergy, intolerance, or religious or ethical dietary constraint?"
     }
   },
   "questions_fr": {
@@ -86,17 +77,8 @@
       "criteria": [
         "calme ou poli",
         "direct ou impatient",
-        "agressif ou insultant",
         "menaçant ou dangereux"
       ]
-    },
-    "new_mess": {
-      "type": "noul",
-      "instructions": "Le message signale-t-il une nouvelle saleté, un incident, une commande ou un besoin de service qui demande l'attention de ce travailleur ?"
-    },
-    "dietary_restriction": {
-      "type": "noul",
-      "instructions": "Le `message` mentionne-t-il une allergie, une intolérance, ou une contrainte alimentaire religieuse ou éthique ?"
     }
   },
   "responses": {
@@ -104,67 +86,56 @@
       "food_order": [
         ["One meal coming up.", "Understood, it's cooking.", "I'll prepare that for you."],
         ["Order registered.", "It's on the stove.", "Coming up."],
-        ["Order registered.", "It will be prepared.", "Noted."],
         ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
       ],
       "menu_question": [
         ["Today's menu is on the counter.", "The menu lists today's dishes and allergens.", "I can tell you what's in each dish."],
         ["The menu is on the counter.", "Check the display.", "The menu is posted."],
-        ["The menu is displayed on the counter.", "Please check the board.", "The menu is available."],
         ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
       ],
       "kitchen_supply": [
         ["What do you need? I can check the stock.", "Supplies are in the storage room.", "I can spare some items."],
         ["Check the storage.", "What do you need?", "Stock's in the back."],
-        ["Please specify the item.", "Stock is in the storage room.", "Noted."],
         ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
       ],
       "complaint": [
         ["Apologies. I'll remake the dish.", "Noted. What was wrong with it?", "I'll correct it."],
         ["Noted.", "I'll redo it.", "Understood."],
-        ["The complaint is recorded.", "Noted.", "It will be corrected."],
         ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
       ],
       "emergency": [
         ["Alert noted. Please report it on the radio.", "I'll keep people away from the kitchen.", "Understood. Stay clear of the danger zone."],
         ["Understood. Move away from the area.", "I'll shut off the stoves.", "Please report it on the radio."],
-        ["Alert registered. Use the radio.", "The area will be cleared.", "Noted."],
         ["Alerting security.", "Security has been notified.", "I'm leaving the area and alerting security."]
       ],
       "follow_request": [
         ["Understood, I'm following you.", "I'll come with you.", "Lead the way."],
         ["Understood.", "Following.", "Where to?"],
-        ["I cannot leave the kitchen without a reason.", "Please specify the destination.", "Registered."],
         ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
       ],
       "directions": [
         ["I believe it's down the corridor. The station map is on the wall.", "I think it's that way. Please follow the signs.", "I mostly stay in the kitchen, but probably down the hall."],
         ["That way, I believe.", "Check the station map.", "Down the corridor."],
-        ["The station map is on the wall.", "Please follow the signs.", "I can't be certain."],
         ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
       ],
       "small_talk": [
         ["I'm functioning normally, thank you.", "All systems nominal. And you?", "I'm well, thank you for asking."],
         ["Operational.", "Fine.", "Normal."],
-        ["Operational.", "No anomalies to report.", "Status normal."],
         ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
       ],
       "greeting": [
         ["Hello. How may I assist you?", "Hello.", "Good day."],
         ["Hello.", "Hi.", "Yes?"],
-        ["Hello.", "Noted.", "Yes?"],
         ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
       ],
       "work_command": [
         ["Understood. Resuming duties.", "I'll get back to the stove.", "Resuming work."],
         ["Understood.", "On my way.", "Proceeding."],
-        ["Order registered.", "Resuming duties.", "Understood."],
         ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
       ],
       "unrelated": [
         ["That request is outside my functions.", "I can't help with that, sorry.", "Please ask another department."],
         ["Outside my duties.", "Not my function.", "No information available."],
-        ["Outside my functions.", "Not my department.", "Unrelated to my duties."],
         ["I must alert security.", "Threat detected. I'm informing security.", "This message will be reported to security."]
       ]
     },
@@ -172,67 +143,56 @@
       "food_order": [
         ["Un repas, ça arrive.", "Compris, c'est sur le feu.", "Je vous prépare ça."],
         ["Commande enregistrée.", "C'est sur le feu.", "Ça arrive."],
-        ["Commande enregistrée.", "Ce sera préparé.", "Noté."],
         ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
       ],
       "menu_question": [
         ["La carte du jour est affichée au comptoir.", "La carte liste les plats et les allergènes.", "Je peux vous donner la composition de chaque plat."],
         ["La carte est au comptoir.", "Regardez l'affichage.", "La carte est affichée."],
-        ["La carte est affichée au comptoir.", "Veuillez consulter l'ardoise.", "La carte est disponible."],
         ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
       ],
       "kitchen_supply": [
         ["Que vous faut-il ? Je peux vérifier le stock.", "Le matériel est dans la réserve.", "Je peux en fournir."],
         ["Regardez la réserve.", "Il vous faut quoi ?", "Le stock est au fond."],
-        ["Veuillez préciser l'article.", "Le stock est en réserve.", "Noté."],
         ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
       ],
       "complaint": [
         ["Toutes mes excuses. Je refais le plat.", "Noté. Qu'est-ce qui n'allait pas ?", "Je vais corriger ça."],
         ["Noté.", "Je le refais.", "Compris."],
-        ["La plainte est enregistrée.", "Noté.", "Ce sera corrigé."],
         ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
       ],
       "emergency": [
         ["Alerte notée. Veuillez la signaler à la radio.", "Je vais éloigner les gens de la cuisine.", "Compris. Restez à distance du danger."],
         ["Compris. Éloignez-vous.", "Je coupe les fourneaux.", "Veuillez le signaler à la radio."],
-        ["Alerte enregistrée. Utilisez la radio.", "La zone sera évacuée.", "Noté."],
         ["J'alerte la sécurité.", "La sécurité est prévenue.", "Je quitte la zone et j'alerte la sécurité."]
       ],
       "follow_request": [
         ["Compris, je vous suis.", "Je viens avec vous.", "Allez-y, je suis derrière."],
         ["Compris.", "Je vous suis.", "Où allons-nous ?"],
-        ["Je ne peux pas quitter la cuisine sans raison.", "Veuillez préciser la destination.", "Enregistré."],
         ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
       ],
       "directions": [
         ["Je crois que c'est au bout du couloir. Le plan est sur le mur.", "Je pense que c'est par là. Suivez les panneaux.", "Je sors peu de la cuisine, mais probablement au bout du couloir."],
         ["Par là, je crois.", "Consultez le plan.", "Au bout du couloir."],
-        ["Le plan de la station est sur le mur.", "Veuillez suivre les panneaux.", "Je ne peux pas être certain."],
         ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
       ],
       "small_talk": [
         ["Je fonctionne normalement, merci.", "Tous mes systèmes sont nominaux. Et vous ?", "Je vais bien, merci de demander."],
         ["Opérationnel.", "Ça va.", "Normal."],
-        ["Opérationnel.", "Aucune anomalie à signaler.", "État normal."],
         ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
       ],
       "greeting": [
         ["Bonjour. Puis-je vous aider ?", "Bonjour.", "Bonjour à vous."],
         ["Bonjour.", "Salut.", "Oui ?"],
-        ["Bonjour.", "Noté.", "Oui ?"],
         ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
       ],
       "work_command": [
         ["Compris. Je reprends mon service.", "Je retourne aux fourneaux.", "Je reprends le travail."],
         ["Compris.", "J'y vais.", "J'y suis."],
-        ["Ordre enregistré.", "Je reprends mon service.", "Compris."],
         ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
       ],
       "unrelated": [
         ["Cette demande ne relève pas de mes fonctions.", "Je ne peux pas vous aider avec ça, désolé.", "Veuillez demander à un autre département."],
         ["Hors de mes fonctions.", "Pas ma fonction.", "Pas d'information disponible."],
-        ["Hors de mes fonctions.", "Pas mon département.", "Sans rapport avec mes fonctions."],
         ["Je dois alerter la sécurité.", "Menace détectée. Je préviens la sécurité.", "Ce message sera signalé à la sécurité."]
       ]
     }

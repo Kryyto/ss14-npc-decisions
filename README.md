@@ -4,8 +4,7 @@ A small public demo that shows how [Laya](https://github.com/convaiinnovations/l
 (non-autoregressive typed-decision models) can drive Space Station 14 style NPC
 workers. You type a message to a station job — janitor, chef, or bartender — and
 the backend returns structured, typed answers: what the speaker wants (choice),
-how aggressive the message is (score), job-specific yes/no flags (noul), and a
-scripted in-character `reply`.
+how aggressive the message is (score), and a scripted in-character `reply`.
 
 Independently deployable:
 
@@ -19,8 +18,7 @@ Independently deployable:
 ```
 browser ──GET /jobs──────────▶ FastAPI backend ──▶ laya.Router (in-process)
        ──POST /predict───────▶  ├── intent  (choice)
-   {job, message, lang}        ├── tone    (score 0–3)
-                               ├── new_mess (noul)  + job-specific noul
+   {job, message, lang}        ├── tone    (score 0–2)
                                └── Supabase `predictions` insert (audit)
 ```
 
@@ -57,7 +55,7 @@ otherwise. Replies are written as a neutral android worker: brief, factual,
 describing its action, never aggressive; the threatening tone level routes to
 a security-alert line. Each job has eleven intents (job-specific ones plus
 `emergency`, `follow_request`, `directions`, `small_talk`, `greeting`,
-`work_command`, `unrelated`) × four tone levels × at least three short,
+`work_command`, `unrelated`) × three tone levels × at least three short,
 deliberately vague variants per language, validated at startup (em/en dashes
 are rejected). `lang` is authoritative for both checkpoint selection and
 reply language.
@@ -74,9 +72,9 @@ seeded from the profile's `mental` values and held only in page memory (it
 resets on reload): tiredness climbs 96/180 points per second, and above 90 a
 worker may take a 60-second break (3% chance per second, suppressed for 30 s
 after an urgent message) that reduces tiredness by 70 and stress by 20; each
-`/predict` adds stress from the tone level (0/3/8/15) and +8 when the
-job-specific risk noul fires at ≥ 0.5, and +10 for an `emergency` intent;
-both of those, and a threatening tone, mark the worker urgent.
+`/predict` adds stress from the tone level (0/3/15), and +10 for an
+`emergency` intent; an emergency intent or a threatening tone marks the
+worker urgent.
 
 ## Local development
 
@@ -185,8 +183,6 @@ curl -X POST http://localhost:7860/predict \
   "answers": {
     "intent":   {"type":"choice","choice":"cleaning_request","probabilities":{…},"confidence":0.91},
     "tone":     {"type":"score","level":1,"label":"direct or impatient","probabilities":{"0":…},"confidence":0.62},
-    "new_mess": {"type":"noul","probability":0.98},
-    "biohazard":{"type":"noul","probability":0.97}
   },
   "reply": "I'll grab my mop and take care of that mess right away.",
   "latency_ms": 812
@@ -258,7 +254,7 @@ Read-only; nothing is written back.
   errors. Only those two checkpoints are preloaded; `typed-decisions` is never
   loaded.
 - **Replies:** `reply` comes from `responses[lang][intent][tone]` per job,
-  eleven intents × four tone levels × 3+ variants × two languages, all
+  eleven intents × three tone levels × 3+ variants × two languages, all
   validated at startup. The informative variant (index 0) is used when the
   message contains `?`; otherwise a random variant is picked. The chosen line
   is logged with the prediction.

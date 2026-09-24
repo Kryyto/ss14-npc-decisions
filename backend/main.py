@@ -1,7 +1,7 @@
 """FastAPI backend for the SS14 NPC typed-decision demo.
 
-One `laya.Router` answers typed questions (intent choice, tone score, job-specific
-nouls) about a crew member's message in the context of a station worker's role.
+One `laya.Router` answers typed questions (intent choice, tone score) about a
+crew member's message in the context of a station worker's role.
 `laya` and `supabase` are imported lazily so this module loads without them.
 """
 from __future__ import annotations
@@ -143,6 +143,10 @@ def _validate_responses(cfg: Dict, where: str) -> None:
     _require(intent.get("type") == "choice" and isinstance(intent.get("criteria"), dict),
              f"{where} needs a choice question 'intent' to key 'responses' on")
     intent_keys = set(intent["criteria"])
+    tone = cfg["questions"].get("tone") or {}
+    _require(tone.get("type") == "score" and isinstance(tone.get("criteria"), list),
+             f"{where} needs a score question 'tone' to size 'responses' rows")
+    n_tones = len(tone["criteria"])
     responses = cfg.get("responses")
     _require(isinstance(responses, dict), f"{where} 'responses' must be an object")
     for lang in LANGS:
@@ -152,11 +156,11 @@ def _validate_responses(cfg: Dict, where: str) -> None:
         _require(set(lang_responses) == intent_keys,
                  f"{where} 'responses.{lang}' keys must match the intent options exactly")
         for key, row in lang_responses.items():
-            _require(isinstance(row, list) and len(row) == 4
+            _require(isinstance(row, list) and len(row) == n_tones
                      and all(isinstance(v, list) and v
                              and all(isinstance(s, str) and s.strip() for s in v)
                              for v in row),
-                     f"{where} 'responses.{lang}.{key}' must be 4 non-empty lists of non-empty strings")
+                     f"{where} 'responses.{lang}.{key}' must be {n_tones} non-empty lists of non-empty strings")
             for variants in row:
                 for s in variants:
                     _require(not any(c in s for c in BANNED_REPLY_CHARS),
@@ -205,7 +209,7 @@ def select_reply(
     options = cfg["responses"][lang]
     if choice not in options:
         raise ValueError(f"no configured reply for intent {choice!r}")
-    if not isinstance(level, int) or isinstance(level, bool) or not 0 <= level < 4:
+    if not isinstance(level, int) or isinstance(level, bool) or not 0 <= level < len(options[choice]):
         raise ValueError(f"no configured reply for tone level {level!r}")
     variants = options[choice][level]
     if "?" in message:

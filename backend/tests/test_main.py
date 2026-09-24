@@ -98,7 +98,7 @@ def test_select_reply_covers_every_cell():
         intents = cfg["questions"]["intent"]["criteria"]
         for lang in ("en", "fr"):
             for intent in intents:
-                for level in range(4):
+                for level in range(len(cfg["questions"]["tone"]["criteria"])):
                     reply = main.select_reply(cfg, lang, _answers(intent, level))
                     assert reply in cfg["responses"][lang][intent][level]
 
@@ -135,7 +135,7 @@ def test_select_reply_rejects_impossible_data():
     with pytest.raises(ValueError):
         main.select_reply(cfg, "en", _answers("nonsense", 0))
     with pytest.raises(ValueError):
-        main.select_reply(cfg, "en", _answers("food_order", 4))
+        main.select_reply(cfg, "en", _answers("food_order", 3))
     with pytest.raises(ValueError):
         main.select_reply(cfg, "en", _answers("food_order", -1))
     with pytest.raises(ValueError):

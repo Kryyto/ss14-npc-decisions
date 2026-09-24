@@ -14,13 +14,8 @@ EXPECTED_KEYS = {"janitor", "chef", "bartender"}
 TONE_CRITERIA = [
     "calm or polite",
     "direct or impatient",
-    "rude or insulting",
     "threatening or dangerous",
 ]
-NEW_MESS_INSTRUCTIONS = (
-    "Does the message report a new mess, incident, order, or service need "
-    "that requires this worker's attention?"
-)
 
 
 def test_loads_all_shipped_jobs():
@@ -34,15 +29,14 @@ def test_every_job_has_expected_shape():
             assert cfg["display_names"][lang]
             assert cfg["description"][lang]
         assert set(cfg["hidden_state"]) == set(main.HIDDEN_STATE_FIELDS)
+        assert set(cfg["questions"]) == {"intent", "tone"}
         assert cfg["questions"]["intent"]["type"] == "choice"
         assert cfg["questions"]["tone"]["type"] == "score"
-        assert cfg["questions"]["new_mess"]["type"] == "noul"
 
 
-def test_shared_tone_criteria_and_new_mess_instructions():
+def test_shared_tone_criteria():
     for cfg in main.JOBS.values():
         assert cfg["questions"]["tone"]["criteria"] == TONE_CRITERIA
-        assert cfg["questions"]["new_mess"]["instructions"] == NEW_MESS_INSTRUCTIONS
 
 
 def test_questions_fr_mirror_questions():
@@ -71,7 +65,7 @@ def test_responses_cover_every_intent_and_tone():
         for lang in ("en", "fr"):
             assert set(cfg["responses"][lang]) == intent_keys
             for key, row in cfg["responses"][lang].items():
-                assert len(row) == 4
+                assert len(row) == len(TONE_CRITERIA)
                 for variants in row:
                     assert len(variants) >= 3
                     assert len(set(variants)) == len(variants)
@@ -125,11 +119,16 @@ def _job_dict(key):
                 "instructions": "What is wanted?",
                 "criteria": {"a": "first", "b": "second"},
             },
+            "tone": {
+                "type": "score",
+                "instructions": "How rude?",
+                "criteria": ["calm", "direct", "threatening"],
+            },
             "flag": {"type": "noul", "instructions": "Is it so?"},
         },
         "responses": {
-            "en": {"a": [["e0"], ["e1"], ["e2"], ["e3"]], "b": [["e0"], ["e1"], ["e2"], ["e3"]]},
-            "fr": {"a": [["f0"], ["f1"], ["f2"], ["f3"]], "b": [["f0"], ["f1"], ["f2"], ["f3"]]},
+            "en": {"a": [["e0"], ["e1"], ["e2"]], "b": [["e0"], ["e1"], ["e2"]]},
+            "fr": {"a": [["f0"], ["f1"], ["f2"]], "b": [["f0"], ["f1"], ["f2"]]},
         },
     }
 
@@ -176,7 +175,7 @@ def test_responses_missing_language_rejected(tmp_path):
 
 def test_responses_intent_coverage_must_be_exact(tmp_path):
     bad = _job_dict("x")
-    bad["responses"]["en"]["extra_intent"] = [["a"], ["b"], ["c"], ["d"]]
+    bad["responses"]["en"]["extra_intent"] = [["a"], ["b"], ["c"]]
     _write_job(tmp_path, bad)
     with pytest.raises(ValueError, match="match the intent options"):
         main.load_jobs(tmp_path)
@@ -188,17 +187,17 @@ def test_responses_intent_coverage_must_be_exact(tmp_path):
         main.load_jobs(tmp_path)
 
 
-def test_responses_row_must_be_four_non_empty_variant_lists(tmp_path):
+def test_responses_row_must_be_three_non_empty_variant_lists(tmp_path):
     for mutate in (
-        lambda r: r["en"].__setitem__("a", [["e0"], ["e1"], ["e2"]]),
-        lambda r: r["en"].__setitem__("a", ["e0", "e1", "e2", "e3"]),
+        lambda r: r["en"].__setitem__("a", [["e0"], ["e1"]]),
+        lambda r: r["en"].__setitem__("a", ["e0", "e1", "e2"]),
         lambda r: r["fr"]["b"].__setitem__(2, []),
         lambda r: r["fr"]["b"][2].__setitem__(0, "   "),
     ):
         bad = _job_dict("x")
         mutate(bad["responses"])
         _write_job(tmp_path, bad)
-        with pytest.raises(ValueError, match="4 non-empty lists"):
+        with pytest.raises(ValueError, match="3 non-empty lists"):
             main.load_jobs(tmp_path)
 
 

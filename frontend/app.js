@@ -63,12 +63,7 @@ const TIREDNESS_PER_SECOND = 96 / 180;
 const BREAK_CHANCE_PER_SECOND = 0.03;
 const BREAK_DURATION_MS = 60000;
 const URGENT_DURATION_MS = 30000;
-const TONE_STRESS = [0, 3, 8, 15];
-const JOB_RISK_QUESTION = {
-  janitor: "biohazard",
-  chef: "dietary_restriction",
-  bartender: "intoxication_risk",
-};
+const TONE_STRESS = [0, 3, 15];
 
 let lang = "en";
 let strings = {};
@@ -220,13 +215,9 @@ function applyPredictionImpact(jobKey, answers) {
   const tone = answers.tone;
   const level = tone && Number.isInteger(tone.level) ? tone.level : 0;
   s.stress = Math.min(100, Math.max(0, s.stress + (TONE_STRESS[level] || 0)));
-  const riskQid = JOB_RISK_QUESTION[jobKey];
-  const risk = riskQid && answers[riskQid];
-  const riskHit = risk && Number(risk.probability) >= 0.5;
-  if (riskHit) s.stress = Math.min(100, s.stress + 8);
   const emergency = answers.intent && answers.intent.choice === "emergency";
   if (emergency) s.stress = Math.min(100, s.stress + 10);
-  if (riskHit || emergency || level === 3) {
+  if (emergency || level === 2) {
     s.urgentUntil = Math.max(s.urgentUntil, Date.now() + URGENT_DURATION_MS);
   }
   renderCharacterProfile();

@@ -52,11 +52,7 @@
   },
   "questions": {
     "intent": "Intent",
-    "tone": "Tone",
-    "new_mess": "Needs attention",
-    "biohazard": "Biohazard",
-    "dietary_restriction": "Dietary restriction",
-    "intoxication_risk": "Intoxication risk"
+    "tone": "Tone"
   },
   "options": {
     "cleaning_request": "Cleaning request",
@@ -79,7 +75,6 @@
   "levels": {
     "0": "Calm or polite",
     "1": "Direct or impatient",
-    "2": "Rude or insulting",
-    "3": "Threatening or dangerous"
+    "2": "Threatening or dangerous"
   }
 }
